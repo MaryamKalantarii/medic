@@ -296,37 +296,24 @@
             <ul class="nav nav-tabs flex-column">
               <li class="nav-item">
                 <a class="nav-link active show" data-bs-toggle="tab" data-bs-target="#tab-1">
-                  <h4>Cardiology</h4>
-                  <p>Quis excepturi porro totam sint earum quo nulla perspiciatis eius.</p>
+                  {% for building in building %}
+                  <h4>{{building.title}}</h4>
+                  <p>{{building.content}}</p>
+                  {% endfor %}
                 </a>
               </li>
-              <li class="nav-item mt-2">
-                <a class="nav-link" data-bs-toggle="tab" data-bs-target="#tab-2">
-                  <h4>Neurology</h4>
-                  <p>Voluptas vel esse repudiandae quo excepturi.</p>
-                </a>
-              </li>
-              <li class="nav-item mt-2">
-                <a class="nav-link" data-bs-toggle="tab" data-bs-target="#tab-3">
-                  <h4>Hepatology</h4>
-                  <p>Velit veniam ipsa sit nihil blanditiis mollitia natus.</p>
-                </a>
-              </li>
-              <li class="nav-item mt-2">
-                <a class="nav-link" data-bs-toggle="tab" data-bs-target="#tab-4">
-                  <h4>Pediatrics</h4>
-                  <p>Ratione hic sapiente nostrum doloremque illum nulla praesentium id</p>
-                </a>
-              </li>
+
             </ul>
           </div>
           <div class="col-lg-8">
             <div class="tab-content">
               <div class="tab-pane active show" id="tab-1">
-                <h3>Cardiology</h3>
-                <p class="fst-italic">Qui laudantium consequatur laborum sit qui ad sapiente dila parde sonata raqer a videna mareta paulona marka</p>
-                <img src="{% static 'assets/img/departments-1.jpg' %}" alt="" class="img-fluid">
-                <p>Et nobis maiores eius. Voluptatibus ut enim blanditiis atque harum sint. Laborum eos ipsum ipsa odit magni. Incidunt hic ut molestiae aut qui. Est repellat minima eveniet eius et quis magni nihil. Consequatur dolorem quaerat quos qui similique accusamus nostrum rem vero</p>
+                {% for building in building %}
+                <h3>{{building.title}}</h3>
+                <p class="fst-italic">{{building.content}}</p>
+                <img src={{building.image.url}} alt="" class="img-fluid">
+                <p>{{building.content}}</p>
+                {% endfor %}
               </div>
               {% comment %} <div class="tab-pane" id="tab-2">
                 <h3>Neurology</h3>
@@ -447,11 +434,11 @@
         </div>
 
         <div class="row">
-          {% for doctor in doctor  %}
+          {% for dc in doctor %}
           <div class="col-lg-3 col-md-6 d-flex align-items-stretch">
             <div class="member" data-aos="fade-up" data-aos-delay="100">
               <div class="member-img">
-                <img src="{% static 'assets/img/doctors/doctors-1.jpg' %}" class="img-fluid" alt="">
+                <img src={{dc.image.url}}  class="img-fluid" alt="">
                 <div class="social">
                   <a href=""><i class="bi bi-twitter"></i></a>
                   <a href=""><i class="bi bi-facebook"></i></a>
@@ -460,8 +447,11 @@
                 </div>
               </div>
               <div class="member-info">
-                <h4>Walter White</h4>
-                <span>Chief Medical Officer</span>
+                
+                <h4>{{dc.info.username}}</h4>
+                {% for sk in dc.skills.all %}
+                <span>{{sk.name}}</span>
+                {% endfor %}
               </div>
             </div>
           </div>
@@ -507,11 +497,11 @@
         </div>
 
         <div class="row">
-
+          {% for healthService in healthService %}
           <div class="col-lg-3 col-md-6">
             <div class="box" data-aos="fade-up" data-aos-delay="100">
-              <h3>Free</h3>
-              <h4><sup>$</sup>0<span> / month</span></h4>
+              <h3>{{healthService.title}}</h3>
+              <h4><sup>${{healthService.price}}</sup>0<span> / month</span></h4>
               <ul>
                 <li>Aida dere</li>
                 <li>Nec feugiat nisl</li>
@@ -524,58 +514,8 @@
               </div>
             </div>
           </div>
+          {% endfor %}
 
-          <div class="col-lg-3 col-md-6 mt-4 mt-md-0">
-            <div class="box featured" data-aos="fade-up" data-aos-delay="200">
-              <h3>Business</h3>
-              <h4><sup>$</sup>19<span> / month</span></h4>
-              <ul>
-                <li>Aida dere</li>
-                <li>Nec feugiat nisl</li>
-                <li>Nulla at volutpat dola</li>
-                <li>Pharetra massa</li>
-                <li class="na">Massa ultricies mi</li>
-              </ul>
-              <div class="btn-wrap">
-                <a href="#" class="btn-buy">Buy Now</a>
-              </div>
-            </div>
-          </div>
-
-          <div class="col-lg-3 col-md-6 mt-4 mt-lg-0">
-            <div class="box" data-aos="fade-up" data-aos-delay="300">
-              <h3>Developer</h3>
-              <h4><sup>$</sup>29<span> / month</span></h4>
-              <ul>
-                <li>Aida dere</li>
-                <li>Nec feugiat nisl</li>
-                <li>Nulla at volutpat dola</li>
-                <li>Pharetra massa</li>
-                <li>Massa ultricies mi</li>
-              </ul>
-              <div class="btn-wrap">
-                <a href="#" class="btn-buy">Buy Now</a>
-              </div>
-            </div>
-          </div>
-
-          <div class="col-lg-3 col-md-6 mt-4 mt-lg-0">
-            <div class="box" data-aos="fade-up" data-aos-delay="400">
-              <span class="advanced">Advanced</span>
-              <h3>Ultimate</h3>
-              <h4><sup>$</sup>49<span> / month</span></h4>
-              <ul>
-                <li>Aida dere</li>
-                <li>Nec feugiat nisl</li>
-                <li>Nulla at volutpat dola</li>
-                <li>Pharetra massa</li>
-                <li>Massa ultricies mi</li>
-              </ul>
-              <div class="btn-wrap">
-                <a href="#" class="btn-buy">Buy Now</a>
-              </div>
-            </div>
-          </div>
 
         </div>
 

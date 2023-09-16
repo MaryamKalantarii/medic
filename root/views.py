@@ -11,10 +11,12 @@ def home(request):
         services = Services.objects.filter(status=True)
         healthService=HealthService.objects.filter(status=True)
         doctor = Doctor.objects.filter(status=True)
+        building = Building.objects.filter(status=True)
         context = {
             'service':services,
             'healthService':healthService,
             'doctor':doctor,
+            'building':building,
         }
         return render(request,"root/index.html",context=context)
     elif request.method == 'POST' and len(request.POST) == 2 :
